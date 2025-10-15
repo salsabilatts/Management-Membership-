@@ -21,7 +21,7 @@ class DashboardController extends Controller
             'total_emoney_balance' => EmoneyCard::active()->sum('balance'),
             'active_programs' => $this->getActivePrograms(),
             'daily_transactions' => $this->getDailyTransactions(),
-            'recent_activities' => $this->getRecentActivities(),
+            // 'recent_activities' => $this->getRecentActivities(),
         ];
 
         return view('admin.dashboard', compact('stats'));
@@ -49,13 +49,13 @@ class DashboardController extends Controller
             ->count();
     }
 
-    private function getRecentActivities()
-    {
-        return DB::table('activity_logs')
-            ->join('users', 'activity_logs.user_id', '=', 'users.id')
-            ->select('activity_logs.*', 'users.name as user_name')
-            ->orderBy('activity_logs.created_at', 'desc')
-            ->limit(10)
-            ->get();
-    }
+    // private function getRecentActivities()
+    // {
+    //     return DB::table('activity_logs')
+    //         ->join('users', 'activity_logs.user_id', '=', 'users.id')
+    //         ->select('activity_logs.*', 'users.name as user_name')
+    //         ->orderBy('activity_logs.created_at', 'desc')
+    //         ->limit(10)
+    //         ->get();
+    // }
 }

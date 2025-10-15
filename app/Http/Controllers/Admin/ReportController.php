@@ -110,29 +110,29 @@ class ReportController extends Controller
 
         switch ($type) {
             case 'members':
-                $data = Member::with('membershipType')->get();
+                $members = Member::with('member')->get();
+                $data = $members;
                 $view = 'admin.exports.members';
                 $filename = 'members_' . now()->format('Y-m-d');
                 break;
-            
             case 'umkm':
-                $data = Umkm::with('member')->get();
+                $umkm = Umkm::with('member')->get();
+                $data = $umkm;
                 $view = 'admin.exports.umkm';
                 $filename = 'umkm_' . now()->format('Y-m-d');
                 break;
-            
             case 'education':
-                $data = EducationAid::with('member')->get();
+                $educationAids = EducationAid::with('member')->get();
+                $data = $educationAids;
                 $view = 'admin.exports.education';
                 $filename = 'education_aids_' . now()->format('Y-m-d');
                 break;
-            
             case 'emoney':
-                $data = EmoneyCard::with('member')->get();
+                $emoneyCards = EmoneyCard::with('member')->get();
+                $data = $emoneyCards;
                 $view = 'admin.exports.emoney';
                 $filename = 'emoney_cards_' . now()->format('Y-m-d');
                 break;
-            
             default:
                 return back()->with('error', 'Tipe export tidak valid');
         }
